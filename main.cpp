@@ -30,6 +30,22 @@ int main()
 	system("pause");
 }
 
- string keywords() {
+ bool isKeywords() {
+
+	}
+
+ bool isSeparator() {
+
+	}
+
+ bool isIdentifier() {
+
+	}
+
+ bool isOperator() {
+
+	}
+
+ bool isReal() {
 
 	}
