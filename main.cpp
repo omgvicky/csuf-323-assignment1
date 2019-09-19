@@ -13,6 +13,16 @@ int main()
 	ofstream myfile;
 	myfile.open("Lexical Analysis");	//makes file named Lexical Analysis
 	myfile << "LEXICAL ANALYSIS" << endl << endl;
+	
+	
+	//for each token, ask what it is, then call method
+	string input;
+	while(file is not empty){
+		input = current token;
+		if isSeparator()
+			find string that or char[] that lies between separators;
+		
+	}
 
 	//SEARCH KEYWORDS
 
