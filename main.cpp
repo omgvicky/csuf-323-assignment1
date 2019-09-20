@@ -3,79 +3,53 @@
 #include <string>
 using namespace std;
 
-bool isKeywords(char input);
-bool isSeparator(char input);
-bool isIdentifier(char input);
-bool isOperator(char input);
-bool isReal(char input)
-void displayData(string data[3][18]);
+string dataMatrix[3][18];
+bool isKeyword(string input);
+bool isSeparator(string input);
+bool isIdentifier(string input);
+bool isOperator(string input);
+bool isReal(string input);
+void displayData();
 
 int main()
 {
-
-	
-	string data[3][18];
-	ifstream datafile("data.txt");
+	ifstream file("data.txt");
 	string line;
 	int i = 0;
 	int j = 0;
-	while (getline(datafile, line)) {
+	while (getline(file, line)) {
 		if (line == "") {
 			i++;
 			j = 0;
 		}
 		else {
-			data[i][j] = line;
+			dataMatrix[i][j] = line;
 			j++;
 		}
 	}
-
 	for (int x = 8; x < 18; x++) {
-		data[2][x] = "";
+		dataMatrix[2][x] = "";
 		if (x > 12)
-			data[1][x] = "";
+			dataMatrix[1][x] = "";
 	}
+	file.close();
+	file.clear();
+	file.seekg(0);
 
+	displayData();
 
-	displayData(data);
-
-	/*
-	cout << "keywords: ";
-	for (int x = 0; x < 18; x++) {
-		cout << data[0][x] << " ";
-	}
-	cout << endl << "separators: ";
-	for (int x = 0; x < 12; x++) {
-		cout << data[1][x] << " ";
-	}
-	cout << endl << "operators: ";
-	for (int x = 0; x < 8; x++) {
-		cout << data[2][x] << " ";
-	}
-
-	cout << endl << endl;*/
-
-
-	/*
-	//READ IN FILES 
-	string readfile;
-	cout << "Input file to read from: ";
-	cin >> readfile;	//input file to read from
-
-	//OUTPUT FILE
-	ofstream myfile;
-	myfile.open("Lexical Analysis");	//makes file named Lexical Analysis
-	myfile << "LEXICAL ANALYSIS" << endl << endl;
-
-
-	//for each token, ask what it is, then call method
+	
+	//READ IN SAMPLE FILES 
+	file.open("Sample_Test.txt");
+	cout << "Reading Sample\n\n" << endl;
 	string input;
-
-	while (file is not empty) {
-		input = current token;
-		if isSeparator()
-			find string that or char[] that lies between separators;
-
+	while (getline(file, input)) {
+		if (isKeyword(input))
+			cout << "Keyword: \t" << input << endl;
+		else if (isSeparator(input))
+			cout << "Separator: \t" << input << endl;
+		else if (isOperator(input))
+			cout << "Operator: \t" << input << endl;
 	}
 
 	//SEARCH KEYWORDS
@@ -90,18 +64,24 @@ int main()
 
 	//SEARCH COMMENTS */
 
+	cout << endl << endl <<  "Done" << endl << endl;
 	return 0;
 	system("PAUSE");
 }
 
-bool isKeywords(char input) {
-	if (input == '(' || input == ')' || input == '{' || input == '}' || input == '[' || input == ']')
-		return true;
+bool isKeyword(string input) {
+	for (int i = 0; i < 18; i++) {
+		if (input == dataMatrix[0][i])
+			return true;
+	}
 	return false;
 }
 
-bool isSeparator(char input) {
-
+bool isSeparator(string input) {
+	for (int i = 0; i < 12; i++) {
+		if (input == dataMatrix[1][i])
+			return true;
+	}
 	return false;
 }
 
@@ -110,8 +90,11 @@ bool isIdentifier(char input) {
 	return false;
 }
 
-bool isOperator(char input) {
-
+bool isOperator(string input) {
+	for (int i = 0; i < 8; i++) {
+		if (input == dataMatrix[2][i])
+			return true;
+	}
 	return false;
 }
 
@@ -120,18 +103,18 @@ bool isReal(char input) {
 	return false;
 }
 
-void displayData(string data[3][18]) {
+void displayData() {
 	cout << "keywords: ";
 	for (int x = 0; x < 18; x++) {
-		cout << data[0][x] << " ";
+		cout << dataMatrix[0][x] << " ";
 	}
 	cout << endl << "separators: ";
 	for (int x = 0; x < 12; x++) {
-		cout << data[1][x] << " ";
+		cout << dataMatrix[1][x] << " ";
 	}
 	cout << endl << "operators: ";
 	for (int x = 0; x < 8; x++) {
-		cout << data[2][x] << " ";
+		cout << dataMatrix[2][x] << " ";
 	}
 
 	cout << endl << endl;
