@@ -3,8 +3,13 @@
 #include <string>
 using namespace std;
 
-
+bool isKeywords(char input);
+bool isSeparator(char input);
+bool isIdentifier(char input);
+bool isOperator(char input);
+bool isReal(char input)
 void displayData(string data[3][18]);
+
 int main()
 {
 
