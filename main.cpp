@@ -17,6 +17,13 @@ int main()
 	string line;
 	int i = 0;
 	int j = 0;
+	
+	//Check if we can open the file or not
+	if (!file.is_open()) {
+		cout << "error while opening the file\n";
+		exit(0);
+	}
+	
 	while (getline(file, line)) {
 		if (line == "") {
 			i++;
@@ -55,7 +62,7 @@ int main()
 	//SEARCH KEYWORDS
 
 	//SEARCH OPERATORS 
-
+	
 	//SEARCH IDENTIFIERS 
 
 	//SEARCH REAL NUMBERS 
@@ -70,11 +77,17 @@ int main()
 }
 
 bool isKeyword(string input) {
+	// Delcare string array of keywords
+	string keyWords[18] = { "int", "float", "bool", "if", "else", "then", "endif", "while",
+				"whileend", "do", "doend", "for", "forend", "input", "output",
+				"and", "or", "function" };
+	
+	//Compare string input with the keywords
 	for (int i = 0; i < 18; i++) {
-		if (input == dataMatrix[0][i])
+		if (input == keyWords[i])
 			return true;
 	}
-	return false;
+	return false
 }
 
 bool isSeparator(string input) {
