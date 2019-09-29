@@ -30,7 +30,10 @@ int main() {
     
     ofstream myfile;
     myfile.open("Lexical Analysis");    //makes file named Lexical Analysis
-    myfile << "LEXICAL ANALYSIS" << endl << endl;
+    myfile << "      LEXICAL ANALYSIS" << endl;
+    myfile<<"------------------------"<<endl;
+    myfile<<"TOKENS \t\tLEXEMES "<<endl<<endl;
+    
     
     if (!file.is_open()) {
         cout << "error while opening the file\n";
