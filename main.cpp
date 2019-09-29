@@ -73,7 +73,7 @@ int main() {
 		}
 
 		//If the first character is not operator nor the seperator, get all the rest of word until reach space
-		if (isalnum(testChar))
+		if (isalnum(testChar)|| testChar=='$')
 		{
 			testWord[j++] = testChar;
 		}
