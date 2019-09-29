@@ -132,3 +132,85 @@ void displayData() {
 
 	cout << endl << endl;
 }
+*********************************************************************************
+Eric version
+********************************************************************
+#include<iostream>
+#include<fstream>
+#include<stdlib.h>
+#include<string.h>
+#include<ctype.h>
+#include <type_traits>
+
+using namespace std;
+
+bool isKeyword(char input[]) {
+	char keyWords[20][10]= {"int", "float", "bool", "if", "else", "then", "endif", "while",
+				"whileend", "do", "doend", "for", "forend", "input", "output",
+				"and", "or", "function", "void", "main"};
+	int i, flag = 0;
+
+	for (i = 0; i < 32; ++i) {
+		if (strcmp(keyWords[i], input) == 0) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+int main() {
+	char testChar, testWord[20], operators[] = "+-*/%=", separators[] = "'(){}[],.:;!";
+	ifstream file("Example.txt");
+	int i, j = 0;
+
+	if (!file.is_open()) {
+		cout << "error while opening the file\n";
+		exit(0);
+	}
+
+	while (!file.eof()) 
+	{
+		//We get the first character of each word
+		testChar = file.get();
+		//Check operator
+		for (i = 0; i < 6; ++i) 
+		{
+			if (testChar == operators[i])
+				cout << testChar << " is operator\n";
+		}
+		//Check seprator
+		for (i = 0; i < 11; ++i) 
+		{
+			if (testChar == separators[i])
+				cout << testChar << " is separator\n";
+		}
+		//Check if number is real or integer??????
+		if (isdigit(testChar))
+		{
+			cout << testChar << " is a number\n";
+		}
+
+		//If the first character is not operator nor the seperator, get all the rest of word until reach space
+		if (isalnum(testChar)) 
+		{
+			testWord[j++] = testChar;
+		}
+		else if ((testChar == ' ' || testChar == '\n') && (j != 0))
+		{
+			//Make the rest of c string become null
+			testWord[j] = '\0';
+			//reset new index of testWord for next testWord
+			j = 0;
+
+			if (isKeyword(testWord))
+				cout << testWord << " is keyword\n";
+			else
+				cout << testWord << " is indentifier\n";
+		}
+	}
+
+	file.close();
+
+	return 0;
+}
